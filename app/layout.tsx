@@ -6,12 +6,9 @@ import TelegramThemeProvider from './components/TelegramThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Fractal Ambassador',
-  description: 'Ambassador Program Dashboard',
-  icons: {
-    icon: '/favicon.ico',
-  },
+  description: 'Ambassador program for Fractal',
   other: {
     'telegram-web-app-capable': 'yes',
     'telegram-web-app-status-bar-style': 'default',

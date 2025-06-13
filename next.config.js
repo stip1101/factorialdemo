@@ -1,12 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
+  // Убираем статический экспорт для Vercel
+  // output: 'export',
+  trailingSlash: false,
   images: {
     unoptimized: true,
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/fractalDemo' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/fractalDemo' : '',
+  // Базовый путь только для production на GitHub Pages
+  // Для Vercel не нужен basePath
+  ...(process.env.GITHUB_PAGES && {
+    output: 'export',
+    trailingSlash: true,
+    assetPrefix: '/fractalDemo',
+    basePath: '/fractalDemo',
+  }),
 }
 
 module.exports = nextConfig 
