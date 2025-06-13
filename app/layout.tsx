@@ -2,12 +2,20 @@ import React from 'react'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import TelegramThemeProvider from './components/TelegramThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Fractal Ambassador',
   description: 'Ambassador Program Dashboard',
+  icons: {
+    icon: '/favicon.ico',
+  },
+  other: {
+    'telegram-web-app-capable': 'yes',
+    'telegram-web-app-status-bar-style': 'default',
+  },
 }
 
 export const viewport: Viewport = {
@@ -31,9 +39,12 @@ export default function RootLayout({
         />
         <meta name="telegram-web-app-capable" content="yes" />
         <meta name="telegram-web-app-status-bar-style" content="default" />
+        <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
       </head>
       <body className={`${inter.className} h-full antialiased safe-area-padding`}>
-        {children}
+        <TelegramThemeProvider>
+          {children}
+        </TelegramThemeProvider>
       </body>
     </html>
   )

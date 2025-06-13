@@ -3,7 +3,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Home, Clipboard, TrendingUp } from 'lucide-react'
-import { Tab } from '../page'
+import type { Tab } from '../types'
 
 interface TabNavigationProps {
   activeTab: Tab

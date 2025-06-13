@@ -1,26 +1,17 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import MyHub from './components/MyHub'
-import Board from './components/Board'
-import Growth from './components/Growth'
-import TabNavigation from './components/TabNavigation'
-
-export type Tab = 'hub' | 'board' | 'growth'
+import { 
+  DynamicMyHub, 
+  DynamicBoard, 
+  DynamicGrowth, 
+  DynamicTabNavigation 
+} from './components/DynamicComponents'
+import type { Tab } from './types'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('hub')
-
-  useEffect(() => {
-    // Initialize Telegram WebApp
-    if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-      window.Telegram.WebApp.ready()
-      window.Telegram.WebApp.expand()
-      window.Telegram.WebApp.setHeaderColor('#000000')
-      window.Telegram.WebApp.setBackgroundColor('#FFF9E3')
-    }
-  }, [])
 
   const pageVariants = {
     initial: { opacity: 0, x: 20 },
@@ -37,18 +28,18 @@ export default function Home() {
   const renderActiveTab = () => {
     switch (activeTab) {
       case 'hub':
-        return <MyHub />
+        return <DynamicMyHub />
       case 'board':
-        return <Board />
+        return <DynamicBoard />
       case 'growth':
-        return <Growth />
+        return <DynamicGrowth />
       default:
-        return <MyHub />
+        return <DynamicMyHub />
     }
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" suppressHydrationWarning>
       {/* Main content */}
       <main className="pb-32">
         <AnimatePresence mode="wait">
@@ -66,7 +57,7 @@ export default function Home() {
       </main>
 
       {/* Tab Navigation - fixed at bottom */}
-      <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
+      <DynamicTabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   )
 } 
